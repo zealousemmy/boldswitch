@@ -3,10 +3,13 @@ import ProductCard from "../productCard";
 import { ProductCardList } from "../../styles/productCardList.style";
 import AddProduct from "../addProduct";
 import getProducts from "../../hooks/getProducts";
+import deleteProduct from "../../hooks/delete";
+import EditProduct from "../editProduct";
 
 const ProductList = () => {
   const [displayAddProduct, setDisplayAddProduct] = useState(false);
   const [products, setProducts] = useState([]);
+  const [showUpdateProduct, setShowUpdateProduct] = useState(false);
   const [filteredpProducts, setFiteredProducts] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
@@ -21,8 +24,11 @@ const ProductList = () => {
   useEffect(() => {
     let currentProduct = getProducts;
 
-    setProducts(currentProduct);
+    setProducts(getProducts);
   }, []);
+
+  const productIndex = localStorage.getItem("productId");
+  console.log(productIndex, "product index");
 
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
@@ -55,7 +61,7 @@ const ProductList = () => {
         <AddProduct addProductCallBack={handleHideAddProduct} />
       )}
 
-      {!displayAddProduct && (
+      {!displayAddProduct && !showUpdateProduct && (
         <>
           {products.length <= 0 ? (
             <div className="cardListContainer">
@@ -63,18 +69,24 @@ const ProductList = () => {
             </div>
           ) : (
             <div className="cardListContainer">
-              {products.map((item) => (
+              {products.map((item, index) => (
                 <ProductCard
                   name={item?.name}
                   price={item?.price}
                   category={item?.category}
                   rating={item?.rating}
+                  editProduct={() => {
+                    localStorage.setItem("productId", JSON.stringify(item.id));
+                    setShowUpdateProduct(true);
+                  }}
+                  deleteProduct={() => deleteProduct(item?.id)}
                 />
               ))}
             </div>
           )}
         </>
       )}
+      {showUpdateProduct && <EditProduct />}
     </ProductCardList>
   );
 };

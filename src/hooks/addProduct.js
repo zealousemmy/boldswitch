@@ -3,7 +3,7 @@ const addProduct = (productDetails) => {
 
   const existingProducts = JSON.parse(localStorage.getItem("products")) || [];
 
-  existingProducts.push(productDetails);
+  existingProducts.push({ ...productDetails, id: existingProducts.length + 1 });
 
   localStorage.setItem("products", JSON.stringify(existingProducts));
 

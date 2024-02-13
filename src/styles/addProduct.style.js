@@ -8,6 +8,9 @@ export const AddProductContainer = styled.div`
   padding: 20px;
   margin: 0 auto;
   border-radius: 10px;
+  @media (max-width: 900px) {
+    width: 80%;
+  }
   input {
     padding: 15px;
     margin: 1rem 0;
@@ -24,5 +27,8 @@ export const AddProductContainer = styled.div`
     background-color: black;
     color: white;
     text-transform: uppercase;
+    @media (max-width: 900px) {
+      width: 80%;
+    }
   }
 `;

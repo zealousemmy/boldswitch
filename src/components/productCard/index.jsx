@@ -1,7 +1,14 @@
 import React from "react";
 import { ProductCardStyle } from "../../styles/card.style";
 
-const ProductCard = ({ name, price, rating, category }) => {
+const ProductCard = ({
+  name,
+  price,
+  rating,
+  category,
+  deleteProduct,
+  editProduct,
+}) => {
   return (
     <ProductCardStyle>
       <h1>Name: {name}</h1>
@@ -14,6 +21,12 @@ const ProductCard = ({ name, price, rating, category }) => {
         <span>Rating : </span>
         {rating}
       </p>
+      <div>
+        <button onClick={editProduct}>edit</button>
+        <button onClick={deleteProduct} className="delete">
+          Delete
+        </button>
+      </div>
     </ProductCardStyle>
   );
 };

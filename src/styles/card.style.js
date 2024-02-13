@@ -20,6 +20,20 @@ export const ProductCardStyle = styled.div`
     letter-spacing: 0.8px;
     font-size: 15px;
   }
+  button {
+    padding: 10px;
+    margin-right: 1rem;
+    border: none;
+    background-color: blue;
+    color: white;
+    text-transform: uppercase;
+    font-weight: bolder;
+    font-size: 15px;
+    border-radius: 10px;
+  }
+  .delete {
+    background-color: red;
+  }
 
   @media (max-width: 900px) {
     width: 90%;
